@@ -312,4 +312,5 @@ class LexerSuite(unittest.TestCase):
         self.assertTrue(TestLexer.test("\"We are almost here\"", "We are almost here,<EOF>", 199))
         
     def test_100(self):
-        self.assertTrue(TestLexer.test("\"Done!\"", "Done!,<EOF>", 200))
+        self.assertTrue(TestLexer.test(""" 
+""", "Done!,<EOF>", 200))

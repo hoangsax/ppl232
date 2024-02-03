@@ -1,4 +1,6 @@
-main: function void() {
-                foo();
-        }
+var x <- foo(3)
+        func main()
+        begin
+            return x
+        end
         

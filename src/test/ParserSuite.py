@@ -43,96 +43,97 @@ func main() return 1"""
         self.assertTrue(TestParser.test(input,expect,204))
         
     def test_105(self):
-        input = """ main: function void(){
-            y:float = 1.2;
-            foo(){}
-        }
-        """
-        expect = "Error on line 3 col 17: {"
+        input = """func main()
+        begin
+            string y <- "string"
+            foo(x)
+        end"""
+        expect = "successful"
         self.assertTrue(TestParser.test(input,expect,205))
         
     def test_106(self):
-        input = """main: function void() {
-                foo();
-        }
+        input = """var x <- foo(3)
+        func main()
+        begin
+            return x
+        end
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,206))
         
     def test_107(self):
-        input = """main: function void() {
+        input = """main()
+        begin
                 foo()
-        }
+        end
         """
         expect = "Error on line 3 col 8: }"
         self.assertTrue(TestParser.test(input,expect,207))
         
     def test_108(self):
-        input = """main: function void() {
-                foo();
-        
+        input = """func main()
+        begin
+            var x = 2
+        end
         """
         expect = "Error on line 4 col 8: <EOF>"
         self.assertTrue(TestParser.test(input,expect,208))
     
     def test_109(self):
-        input = """main:function void() {
-        numOfShape: integer = 0;
-        immutableAttribute: integer = 0;
-        length, width: integer;
-        b = getNumOfShape();
-        }
-        
+        input = """func main()
+        begin
+            var x
+        end
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,209))
         
     def test_110(self):
-        input = """main: function void(){
-            if (x == 2){
-                return 2;
-            }
-        }
-        """
+        input = """func main()
+        begin
+            bool x
+        end"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,210))
         
     def test_111(self):
-        input = """main: function void(){
-            if (x == 2){
-                return 2
-            }
-        }
-        """
+        input = """func main()
+        begin
+            var a <- 10
+            if (a > 2) a = a - 1
+            return a
+        end"""
         expect = "Error on line 4 col 12: }"
         self.assertTrue(TestParser.test(input,expect,211))
         
     def test_112(self):
-        input = """main: function void(x){
-            if (x == 2){
-                return 2;
-            }
-        }
+        input = """func foo(n)
+        func main()
+        begin
+            return 1
+        end
         """
         expect = "Error on line 1 col 20: x"
         self.assertTrue(TestParser.test(input,expect,212))
         
     def test_113(self):
-        input = """main: function void(){
-            if (x == 2){
-                return 2;
-        }
-        """
+        input = """func rando(string x, number y)
+        begin
+            x[y] <- "a"
+        end
+    func main()
+        begin
+            return foo("bbcde", 0)
+        end
+"""
         expect = "Error on line 5 col 8: <EOF>"
         self.assertTrue(TestParser.test(input,expect,213))
         
     def test_114(self):
-        input = """main: function void(){
-            for (i = 1, i < 10, i + 1){
-                x = 1;
-            }
-        }
-        """
+        input = """func main()
+        begin
+            var x <- y[0] * foo(5) / (foo(2) + 10)
+        end"""
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,214))
         
@@ -842,96 +843,102 @@ func main() return 1"""
         self.assertTrue(TestParser.test(input,expect,289))
 
     def test_190(self):
-        input = """main: function void(){
-            x, y: integer;
-        }
+        input = """func main() return 1
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,290))
 
     def test_191(self):
-        input = """main: function void(){
-            x, y, 3: integer;
-        }
+        input = """func main()
+        begin
+            va x <- 10
+        end
         """
-        expect = "Error on line 2 col 18: 3"
+        expect = "Error on line 3 col 15: x"
         self.assertTrue(TestParser.test(input,expect,291))
 
     def test_192(self):
-        input = """main: function void(){
-            x, y: integer = 1.2, 1.3;
-        }
+        input = """func main()
+        begin
+            va x <- 1
+        end
         """
-        expect = "successful"
+        expect = "Error on line 3 col 15: x"
         self.assertTrue(TestParser.test(input,expect,292))
 
     def test_193(self):
-        input = """main: function void(){
-            x, y: float = 1.2, 1.3;
-        }
+        input = """func main()
+        begin
+            var x[5] <- [0, 1, 2, 3,] 
+        end
         """
-        expect = "successful"
+        expect = "Error on line 3 col 36: ]"
         self.assertTrue(TestParser.test(input,expect,293))
 
     def test_194(self):
-        input = """main: function void(){
-            x, y: integer = {1, 2};
-        }
+        input = """func main()
+        begin
+            var x[5] <- [0, 1, 2, 3, 4]
+        end
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,294))
 
     def test_195(self):
-        input = """main: function void(){
-        }
-        foo1:function integer(out x: float) inherit foo{
-        
-        }
+        input = """func main()
+        begin
+            return 0
+        end
+    func _foo()
+        begin
+            return 0
+        end
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,295))
 
     def test_196(self):
-        input = """main: function void(){
-        }
-        foo1:function integer(out x: float, y: integer){
-        
-        }
-        """
-        expect = "successful"
+        input = """func main(){"""
+        expect = "Error on line 1 col 11: {"
         self.assertTrue(TestParser.test(input,expect,296))
 
     def test_197(self):
-        input = """main: function void(){
-        }
-        foo1:function integer(out x: float, y){
-        
-        }
+        input = """func foo1(string x, y)
+        func main()
+        begin
+            return 0
+        end
         """
-        expect = "Error on line 3 col 45: )"
+        expect = "Error on line 1 col 20: y"
         self.assertTrue(TestParser.test(input,expect,297))
 
     def test_198(self):
-        input = """main: function void(){
-            a[0, 1] = 10;
-        }
+        input = """func main()
+        begin
+            a[0, 1] <- 10
+            var x <- 10
+        end
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,298))
 
     def test_199(self):
-        input = """main: function void(){
-            a[0, 1] = 10 , 2;
-        }
+        input = """dynamic y <- x[a, b, 9]
+        func main()
+        begin
+            return 1
+        end
         """
-        expect = "Error on line 2 col 25: ,"
+        expect = "successful"
         self.assertTrue(TestParser.test(input,expect,299))
 
     def test_200(self):
-        input = """main: function void(){
-            a[0, 1] = 10;
-            a[0, 1] = a[0, 1] - 1;
-        }
+        input = """func main()
+        begin
+            a[0, 1] <- 10
+            var x <- 10
+            
+        end
         """
         expect = "successful"
         self.assertTrue(TestParser.test(input,expect,300))

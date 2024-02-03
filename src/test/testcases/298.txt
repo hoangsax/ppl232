@@ -1,4 +1,6 @@
-main: function void(){
-            a[0, 1] = 10;
-        }
+func main()
+        begin
+            a[0, 1] <- 10
+            var x <- 10
+        end
         

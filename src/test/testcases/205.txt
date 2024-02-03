@@ -1,5 +1,5 @@
- main: function void(){
-            y:float = 1.2;
-            foo(){}
-        }
-        
+func main()
+        begin
+            string y <- "string"
+            foo(x)
+        end

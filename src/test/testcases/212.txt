@@ -1,6 +1,6 @@
-main: function void(x){
-            if (x == 2){
-                return 2;
-            }
-        }
+func foo(n)
+        func main()
+        begin
+            return 1
+        end
         

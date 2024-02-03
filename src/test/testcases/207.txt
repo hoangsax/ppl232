@@ -1,4 +1,5 @@
-main: function void() {
+main()
+        begin
                 foo()
-        }
+        end
         

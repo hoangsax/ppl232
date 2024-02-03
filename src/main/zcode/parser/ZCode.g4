@@ -9,34 +9,34 @@ options {
 }
 
 program: (other)* mainfunc other* EOF;
-main: mainfunc;
-other: funcdecl | valdecl | stmt ;
-mainblock: '\\r' BEGIN '\\r' stmt* (RETURN exp)? '\\r' END '\\r' | RETURN exp | ;
-valdecl: (TYPE | DYNAMIC) ID array? | (TYPE | IMPLIKEYS) ID array? ASSIGN exp;
+other: funcdecl | valdecl NEWLINE+ | stmt ;
+valdecl: (TYPE | DYNAMIC) ID arraydecl?| (TYPE | IMPLIKEYS) ID arraydecl? ASSIGN exp;
 mainfunc: FUNC MAIN LB RB funcblock;
 funcdecl: FUNC ID LB paramlist RB funcblock;
-funcblock: BEGIN stmt* END | RETURN exp ;
+funcblock: NEWLINE* BEGIN NEWLINE+ stmtlist END NEWLINE+ | stmt;
 
 //Statements
 stmts: ;
-stmt: valdecl | assignstmt | funcall | exp | ifstmt | RETURN exp;
-stmtblock: BEGIN (stmt)* END | stmt | ;
+stmt: (valdecl | assignstmt | funcall | exp | ifstmt | RETURN exp) NEWLINE+;
+stmtblock: BEGIN stmtlist END | stmt | ;
+stmtlist: stmt stmtlist | stmt | ;
 
 assignstmt: (ID | indexp) ASSIGN exp ;
 
 //ifstmt
-ifstmt: IF ifblock elifblk* elseblk?;
+ifstmt: IF ifblock elifblk elseblk;
 
 ifblock: LB exp RB stmtblock;
-elseblk: ELSE stmtblock;
-elifblk: ELIF ifblock;
+elseblk: ELSE stmtblock | ;
+elifblk: elifblk_0 elifblk | elifblk_0 | ;
+elifblk_0: ELIF ifblock;
 //forstmt
 forstmt: FOR (ID | NUMLIT) UNTIL logicexp BY exp loopblock ;
-loopblock: BEGIN (stmt+ loopkey?)? END | stmt;
+loopblock: BEGIN (stmt+ (loopkey NEWLINE+)? )? END | stmt;
 loopkey: BREAK | CONTINUE;
 
 //Array
-array: LS NUMLIT (COMMA NUMLIT)* RS;
+arraydecl: LS NUMLIT (COMMA NUMLIT)* RS;
 funcall: ID LB exp? RB;
 paramcall: (exp) (COMMA (exp))*;
 paramlist: params (COMMA params)* | ;
@@ -46,14 +46,20 @@ TYPE: NUMBER | STRING | BOOL;
 IMPLIKEYS: VAR | DYNAMIC;
 //Expressions
 exp: exp NUMOP exp_01 | exp_01 ;
-exp_01: ariexp | logicexp | relatexp | expall | STRINGLIT | LB exp_01 RB;
+exp_01: ariexp | logicexp | relatexp | expall | array | STRINGLIT | LB exp_01 RB;
 exp_00: NUMLIT | STRINGLIT | BOOLIT;
 expall: ID | indexp | funcall;
 
+array: LS explist RS;
+explist: explist_1| explist_2 | explist_3 ;
+explist_1: NUMLIT COMMA explist_1 | NUMLIT | expall;
+explist_2: STRINGLIT COMMA explist_2 | STRINGLIT | expall;
+explist_3: BOOLIT COMMA explist_3 | BOOLIT | expall;
 //Index operators
 
 indexp: ID LS indop RS;
-indop: indop NUMOP indop_1 | indop_1;
+indop: indop (COMMA indop) | indop_0;
+indop_0: indop_0 NUMOP indop_1 | indop_1;
 indop_1: NUMLIT | ariexp | expall;
 
 NUMOP: PLUS | STAR | PERCENT | MINUS;
@@ -135,8 +141,8 @@ COMMA: ',';
 
 COMMENT: '#' '#' (.)*? ('\r' | EOF );
 ID: ('_' | [a-zA-Z]) ('_' | [a-zA-Z0-9])*;
-
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+NEWLINE: '\r'? '\n';
+WS : [ \t]+ -> skip ; // skip spaces, tabs
 ERROR_CHAR: . {raise ErrorToken(self.text)};
 UNCLOSE_STRING:
 	'"' (~'"' | '\'"')* EOF {self.text = self.text.replace("\"",""); raise UncloseString(self.text)};

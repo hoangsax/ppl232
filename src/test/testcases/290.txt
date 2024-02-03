@@ -1,4 +1,2 @@
-main: function void(){
-            x, y: integer;
-        }
+func main() return 1
         

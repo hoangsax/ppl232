@@ -1,1 +1,5 @@
-"hmu hmu" + "ha ha"
+func main()
+        begin
+            a[0, 1] <- 10
+            var x <- 10
+        end

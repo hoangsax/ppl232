@@ -1,6 +1,6 @@
-main: function void(){
-        }
-        foo1:function integer(out x: float, y){
-        
-        }
+func foo1(string x, y)
+        func main()
+        begin
+            return 0
+        end
         

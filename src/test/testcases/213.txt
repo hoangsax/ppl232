@@ -1,5 +1,8 @@
-main: function void(){
-            if (x == 2){
-                return 2;
-        }
-        
+func rando(string x, number y)
+        begin
+            x[y] <- "a"
+        end
+    func main()
+        begin
+            return foo("bbcde", 0)
+        end

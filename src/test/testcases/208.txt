@@ -1,4 +1,5 @@
-main: function void() {
-                foo();
-        
+func main()
+        begin
+            var x = 2
+        end
         

@@ -1,6 +1,9 @@
-main: function void(){
-        }
-        foo1:function integer(out x: float) inherit foo{
-        
-        }
+func main()
+        begin
+            return 0
+        end
+    func _foo()
+        begin
+            return 0
+        end
         

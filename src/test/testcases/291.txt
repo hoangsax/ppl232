@@ -1,4 +1,5 @@
-main: function void(){
-            x, y, 3: integer;
-        }
+func main()
+        begin
+            va x <- 10
+        end
         

@@ -1,4 +1,5 @@
-main: function void(){
-            x, y: integer = {1, 2};
-        }
+func main()
+        begin
+            var x[5] <- [0, 1, 2, 3, 4]
+        end
         
