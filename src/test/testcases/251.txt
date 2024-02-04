@@ -1,6 +1,7 @@
-main: function void(){
-            if (foo(2) <= 3){
-            
-            }
-        }
+func main()
+        begin
+            if (x)
+            begin
+            end
+        end
         

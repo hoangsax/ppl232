@@ -1,4 +1,6 @@
-main: function void(){
-            x: array [4, 1] of integer;
-        }
+func main()
+        begin
+            if (x) 
+            return 1
+        end
         

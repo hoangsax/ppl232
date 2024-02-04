@@ -1,4 +1,2 @@
-main: function void(){
-            x = !y;
-        }
+func main () return x or y
         

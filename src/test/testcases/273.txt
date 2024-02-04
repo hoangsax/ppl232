@@ -1,4 +1,5 @@
-main: function void(){
-            x:string = "He said: \"Are you ok?\""::;
-        }
+func main()
+        begin
+            string x <- "He said: '"Are you ok?'""
+        end
         

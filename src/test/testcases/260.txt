@@ -1,4 +1,10 @@
-main: function void){
-            x:integer = foo(1);
-        }
+func add(a, number b)
+        begin
+            return a + b
+        end
+        func main()
+        begin
+            number result <- add(2, 3)
+        end
+
         

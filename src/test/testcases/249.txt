@@ -1,6 +1,7 @@
-main: function void(){
-            if (3 || 4){
-            
-            }
-        }
+func main()
+        begin
+            if (not x or y)
+            begin
+            end
+        end
         

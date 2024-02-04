@@ -1,4 +1,9 @@
-main: function void(){
-            x:boolean = TRUE;
-        }
+func main()
+        begin
+            for i until i > 10 by 1
+            begin
+                dosth()
+                if (i = 9) break
+            end
+        end
         

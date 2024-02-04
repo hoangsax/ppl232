@@ -1,6 +1,7 @@
-main: function void(){
-            if (2 < 3){
-            
-            }
-        }
+func main()
+        begin
+            if (not (x > y and z))
+            begin
+            end
+        end
         

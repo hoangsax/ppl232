@@ -1,4 +1,5 @@
-main: function void(){
-            x:string = "FALSE" :: "TRUE";
-        }
+func main()
+        begin
+            var x <- not y
+        end
         

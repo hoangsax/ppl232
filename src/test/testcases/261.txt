@@ -1,4 +1,10 @@
-main: function void()){
-            x:integer = foo(1);
-        }
+func concatenateStrings(string str1, string str2)
+        begin
+            return str1...str2
+        end
+
+        func main()
+        begin
+            string result <- concatenateStrings("Hello", " World!")
+        end
         

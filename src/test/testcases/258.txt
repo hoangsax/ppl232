@@ -1,4 +1,7 @@
-main: function void(){
-            x = 3:2;
-        }
+func length(string a)
+        func main()
+        begin
+            var x <- "Hello World!"
+            var y
+        end
         

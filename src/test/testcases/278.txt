@@ -1,4 +1,6 @@
-main: function void(){
-            x:float = 11E-3 / 0.123;
-        }
-        
+func main()
+        begin
+            if (x < 2 or x > 4) return 1
+            elif (x = 3) return 2
+            else return 0
+        end

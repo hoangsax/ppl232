@@ -1,6 +1,7 @@
-main: function void(){
-            if (x || y || z){
-            
-            }
-        }
+func main()
+        begin
+            if (x or y or z or f)
+            begin
+            end
+        end
         

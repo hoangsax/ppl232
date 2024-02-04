@@ -1,6 +1,4 @@
-main: function void(){
-            if (foo(x, y, z) <= 3){
-            
-            }
-        }
+func main()
+        begin
+            a[3 + foo(2)] <- a[b[2, 3]] + 4 end
         

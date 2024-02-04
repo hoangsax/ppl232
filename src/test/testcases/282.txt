@@ -1,4 +1,5 @@
-main: function void(){
-            x:float = 11E-3 / 100;
-        }
+func main()
+        begin
+            if (x < 2 or x > 4) return 1
+        end
         

@@ -1,4 +1,7 @@
-main: function void(){
-            x:integer = foo(1);
-        }
+func length(string a)
+        func main()
+        begin
+            var x <- "Hello World!"
+            var y <- length(x)
+        end
         

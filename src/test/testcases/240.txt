@@ -1,6 +1,8 @@
-main: function void(){
-            if (x || y){
-            
-            }
-        }
+func main()
+        begin
+            var i <- 0
+            var x <- 0
+            for i until i > 2 by 1
+                x <- x + i
+        end
         

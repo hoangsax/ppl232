@@ -1,4 +1,5 @@
-main: function void(){
-            x:string = "FALSE" + " ";
-        }
+func main()
+        begin
+            var x <- (y and z) or a
+        end
         

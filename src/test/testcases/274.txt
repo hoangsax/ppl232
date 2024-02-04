@@ -1,4 +1,5 @@
-main: function void(){
-            x:float = 1_1.14;
-        }
+func main()
+        begin
+            for x until x > 8 by 1 dosth()
+        end
         

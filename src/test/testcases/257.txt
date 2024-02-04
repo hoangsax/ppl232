@@ -1,6 +1,5 @@
-main: function void(){
-            if (x){
-                x = fooy + 2);
-            }
-        }
+func main()
+        begin
+            return foo(2) + 9
+        end
         
