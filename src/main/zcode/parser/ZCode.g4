@@ -8,36 +8,36 @@ options {
 	language=Python3;
 }
 
-program: (other)* mainfunc other* EOF;
-other: funcdecl | valdecl NEWLINE+ | stmt ;
-valdecl: (TYPE | DYNAMIC) ID arraydecl?| (TYPE | IMPLIKEYS) ID arraydecl? ASSIGN exp;
-mainfunc: FUNC MAIN LB RB funcblock;
+program: other* mainfunc other* EOF;
+other: funcdecl | stmt ;
+valdecl: (TYPE | DYNAMIC) ID arraydecl?| (TYPE | IMPLIKEYS) ID arraydecl? ASSIGN allexp;
+mainfunc: FUNC MAIN LB RB NEWLINE* funcblock;
 funcdecl: FUNC ID LB paramlist RB funcblock;
 funcblock: NEWLINE* BEGIN NEWLINE+ stmtlist END NEWLINE+ | stmt;
 
 //Statements
 stmts: ;
-stmt: (valdecl | assignstmt | funcall | exp | ifstmt | RETURN exp) NEWLINE+;
-stmtblock: BEGIN stmtlist END | stmt | ;
+stmt: (valdecl | assignstmt | funcall | exp | RETURN allexp) NEWLINE+ | ifstmt;
+stmtblock: funcblock | NEWLINE* ;
 stmtlist: stmt stmtlist | stmt | ;
 
-assignstmt: (ID | indexp) ASSIGN exp ;
+assignstmt: (ID | indexp) ASSIGN allexp ;
 
 //ifstmt
-ifstmt: IF ifblock elifblk elseblk;
+ifstmt:;
 
-ifblock: LB exp RB stmtblock;
-elseblk: ELSE stmtblock | ;
-elifblk: elifblk_0 elifblk | elifblk_0 | ;
-elifblk_0: ELIF ifblock;
+// ifblock: LB allexp RB funcblock;
+// elseblk: ELSE funcblock | ;
+// elifblk: elifblk_0 elifblk | elifblk_0 | ;
+// elifblk_0: ELIF ifblock;
 //forstmt
 forstmt: FOR (ID | NUMLIT) UNTIL logicexp BY exp loopblock ;
-loopblock: BEGIN (stmt+ (loopkey NEWLINE+)? )? END | stmt;
+loopblock: BEGIN NEWLINE+ (stmtlist (loopkey NEWLINE+)? ) END NEWLINE+ | stmt;
 loopkey: BREAK | CONTINUE;
 
 //Array
 arraydecl: LS NUMLIT (COMMA NUMLIT)* RS;
-funcall: ID LB exp? RB;
+funcall: ID LB explist RB;
 paramcall: (exp) (COMMA (exp))*;
 paramlist: params (COMMA params)* | ;
 params: TYPE ID ; //Parameter
@@ -45,8 +45,9 @@ params: TYPE ID ; //Parameter
 TYPE: NUMBER | STRING | BOOL;
 IMPLIKEYS: VAR | DYNAMIC;
 //Expressions
-exp: exp NUMOP exp_01 | exp_01 ;
-exp_01: ariexp | logicexp | relatexp | expall | array | STRINGLIT | LB exp_01 RB;
+allexp: exp | relatexp | stringexp;
+exp: exp_01 NUMOP exp | exp_01;
+exp_01: ariexp | expall | array | LB exp RB;
 exp_00: NUMLIT | STRINGLIT | BOOLIT;
 expall: ID | indexp | funcall;
 
@@ -55,6 +56,7 @@ explist: explist_1| explist_2 | explist_3 ;
 explist_1: NUMLIT COMMA explist_1 | NUMLIT | expall;
 explist_2: STRINGLIT COMMA explist_2 | STRINGLIT | expall;
 explist_3: BOOLIT COMMA explist_3 | BOOLIT | expall;
+
 //Index operators
 
 indexp: ID LS indop RS;
@@ -62,23 +64,27 @@ indop: indop (COMMA indop) | indop_0;
 indop_0: indop_0 NUMOP indop_1 | indop_1;
 indop_1: NUMLIT | ariexp | expall;
 
-NUMOP: PLUS | STAR | PERCENT | MINUS;
+NUMOP: PLUS | STAR | PERCENT | MINUS | SLASH;
 
 //Arithmetic operators
 ariexp: ariexp_00 NUMOP ariexp | MINUS ariexp | ariexp_00;
-ariexp_00: NUMLIT | expall;
+ariexp_00: NUMLIT | expall | LB ariexp RB;
+
+//Relation operators
+relatexp: LB relatexp_00 RB | relatexp_00;
+relatexp_00: exp NUMRELAOPS exp | relatexp_01 EQUALITY relatexp_01 ;
+relatexp_01: STRINGLIT | expall;
+NUMRELAOPS: EQUAL | LESSTHAN | LESSEQUAL | MOREEQUAL | MORETHAN | INEQUAL;
 
 //Logic operators
 logicexp:
 		logicexp LOGICOPBIN logicexp_00 | logicexp_00 | NOT logicexp;
 logicexp_00: BOOLIT | relatexp | expall;
 LOGICOPBIN: AND | OR;
+//string op
 
-//Relation operators
-relatexp: relatexp_00 NUMRELAOPS relatexp_00 | relatexp_01 EQUALITY relatexp_01 ;
-relatexp_00: NUMLIT | expall;
-relatexp_01: STRINGLIT | expall;
-NUMRELAOPS: EQUAL | INEQUAL | LESSTHAN | LESSEQUAL | MOREEQUAL | MORETHAN;
+stringexp: stringexp_00 ELLIPSIS stringexp_00 ;
+stringexp_00: STRINGLIT | expall;
 
 //LITERALS
 fragment SUBSTR: ('\'"' .*? '\'"');

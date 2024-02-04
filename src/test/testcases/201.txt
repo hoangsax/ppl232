@@ -1,2 +1,4 @@
-func main ()
+func main () begin 
         return 1
+        end
+        

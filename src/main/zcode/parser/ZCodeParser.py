@@ -154,7 +154,7 @@ def serializedATN():
         buf.write("\3\2\2\2\u0131\u0132\3\2\2\2\u0132\63\3\2\2\2\u0133\u0131")
         buf.write("\3\2\2\2\u0134\u013f\5L\'\2\u0135\u013f\5P)\2\u0136\u013f")
         buf.write("\5T+\2\u0137\u013f\58\35\2\u0138\u013f\5:\36\2\u0139\u013f")
-        buf.write("\7\b\2\2\u013a\u013b\7\60\2\2\u013b\u013c\5\64\33\2\u013c")
+        buf.write("\7\b\2\2\u013a\u013b\7\60\2\2\u013b\u013c\5\62\32\2\u013c")
         buf.write("\u013d\7\61\2\2\u013d\u013f\3\2\2\2\u013e\u0134\3\2\2")
         buf.write("\2\u013e\u0135\3\2\2\2\u013e\u0136\3\2\2\2\u013e\u0137")
         buf.write("\3\2\2\2\u013e\u0138\3\2\2\2\u013e\u0139\3\2\2\2\u013e")
@@ -2166,8 +2166,8 @@ class ZCodeParser ( Parser ):
         def LB(self):
             return self.getToken(ZCodeParser.LB, 0)
 
-        def exp_01(self):
-            return self.getTypedRuleContext(ZCodeParser.Exp_01Context,0)
+        def exp(self):
+            return self.getTypedRuleContext(ZCodeParser.ExpContext,0)
 
 
         def RB(self):
@@ -2234,7 +2234,7 @@ class ZCodeParser ( Parser ):
                 self.state = 312
                 self.match(ZCodeParser.LB)
                 self.state = 313
-                self.exp_01()
+                self.exp(0)
                 self.state = 314
                 self.match(ZCodeParser.RB)
                 pass
