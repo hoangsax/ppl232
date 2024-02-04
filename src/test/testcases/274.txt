@@ -1,0 +1,4 @@
+main: function void(){
+            x:float = 1_1.14;
+        }
+        

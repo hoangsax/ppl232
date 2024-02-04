@@ -1,0 +1,6 @@
+main: function void(){
+        }
+        foo1:function integer(out x: float) inherit foo{
+        
+        }
+        

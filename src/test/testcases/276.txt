@@ -1,0 +1,4 @@
+main: function void(){
+            x:float = 11E-3;
+        }
+        

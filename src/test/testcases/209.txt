@@ -1,0 +1,8 @@
+main:function void() {
+        numOfShape: integer = 0;
+        immutableAttribute: integer = 0;
+        length, width: integer;
+        b = getNumOfShape();
+        }
+        
+        

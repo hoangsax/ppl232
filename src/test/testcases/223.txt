@@ -1,0 +1,14 @@
+main: function void(){
+            if (x <= b){
+                if (x < b){
+                    x = x - b;
+                }
+                else{
+                    x = x - b - 1;
+                }
+            }
+            else{
+                x = x + b;
+            }
+        }
+        

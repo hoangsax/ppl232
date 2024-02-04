@@ -1,0 +1,5 @@
+main: function void(){}
+        abcd:function (x:integer){
+        }
+        
+        

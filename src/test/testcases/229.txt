@@ -1,0 +1,6 @@
+main: function void(){
+            a: integer = 10 + 5/2;
+            b = a;
+            c = foo();
+        }
+        

@@ -1,0 +1,4 @@
+main: function void(){
+            x = 3:2;
+        }
+        

@@ -1,0 +1,11 @@
+main: function void(){
+            while(x){
+                if (x == 2){
+                    x = x - 2;
+                }
+                else{
+                    x = 0;
+                }
+            }
+        }
+        

@@ -1,0 +1,4 @@
+main: function void(){
+            x:string = "He said: \"Are you ok?\""::"\"Yesn't\"";
+        }
+        

@@ -1,0 +1,6 @@
+main: function void(){
+            do{
+                x = x + 1
+            } while (x)
+        }
+        

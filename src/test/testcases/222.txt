@@ -1,0 +1,9 @@
+main: function void(){
+            if (x <= b){
+                x = x - b;
+            }
+            else{
+                x = x + b;
+            }
+        }
+        
